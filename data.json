@@ -1,0 +1,52 @@
+{
+    "products": [
+        {
+            "title": "Diesel",
+            "src": "./public/product Images/1.jpg",
+            "path": "/#",
+            "label": "Trash"
+        },
+        {
+            "title": "Levi's",
+            "src": "./public/product Images/2.jpg",
+            "path": "/#",
+            "label": "Recycle"
+        },
+        {
+            "title": "Wrangler",
+            "src": "./public/product Images/3.jpg",
+            "path": "/#",
+            "label": "Trash"
+        },
+        {
+            "title": "Calvin Klein",
+            "src": "./public/product Images/4.jpg",
+            "path": "/#",
+            "label": "Recycle"
+        },
+        {
+            "title": "Tommy Hilfiger",
+            "src": "./public/product Images/5.jpg",
+            "path": "/#",
+            "label": "Trash"
+        },
+        {
+            "title": "Gap",
+            "src": "./public/product Images/6.jpg",
+            "path": "/#",
+            "label": "Recycle"
+        },
+        {
+            "title": "H&M",
+            "src": "./public/product Images/7.jpg",
+            "path": "/#",
+            "label": "Trash"
+        },
+        {
+            "title": "Zara",
+            "src": "./public/product Images/8.jpg",
+            "path": "/#",
+            "label": "Recycle"
+        }
+    ]
+}

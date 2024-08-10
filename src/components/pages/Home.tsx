@@ -1,8 +1,16 @@
 import React from 'react'
+import Cards from '../Cards'
 
 const Home = () => {
   return (
-    <div className='text-3xl font-bold-500'>Home</div>
+        <>
+            <section className='home'>
+                Home
+            </section>
+            <section>
+                <Cards />
+            </section>
+        </>  
   )
 }
 
