@@ -4,49 +4,57 @@
             "title": "Diesel",
             "src": "./public/product Images/1.jpg",
             "path": "/#",
-            "label": "Trash"
+            "label": "",
+            "price": 100
         },
         {
             "title": "Levi's",
             "src": "./public/product Images/2.jpg",
             "path": "/#",
-            "label": "Recycle"
+            "label": "sold out",
+            "price": 100
         },
         {
             "title": "Wrangler",
             "src": "./public/product Images/3.jpg",
             "path": "/#",
-            "label": "Trash"
+            "label": "Trash",
+            "price": 100
         },
         {
             "title": "Calvin Klein",
             "src": "./public/product Images/4.jpg",
             "path": "/#",
-            "label": "Recycle"
+            "label": "sold out",
+            "price": 100
         },
         {
             "title": "Tommy Hilfiger",
             "src": "./public/product Images/5.jpg",
             "path": "/#",
-            "label": "Trash"
+            "label": "Trash",
+            "price": 100
         },
         {
             "title": "Gap",
             "src": "./public/product Images/6.jpg",
             "path": "/#",
-            "label": "Recycle"
+            "label": "sold out",
+            "price": 100
         },
         {
             "title": "H&M",
             "src": "./public/product Images/7.jpg",
             "path": "/#",
-            "label": "Trash"
+            "label": "Trash",
+            "price": 100
         },
         {
             "title": "Zara",
             "src": "./public/product Images/8.jpg",
             "path": "/#",
-            "label": "Recycle"
+            "label": "sold out",
+            "price": 100
         }
     ]
 }
