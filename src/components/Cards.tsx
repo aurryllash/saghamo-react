@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import CardItem from './CardItem';
+import './Cards.css'
 
 
 interface Product {
@@ -23,13 +25,16 @@ const Cards = () => {
 
   return (
     <div className="cards">
-        <div className="cards_container">
-            <div className="cards_wrapper">
-                <ul className="cards_items">
-                {products.map((product, index) => (
-                            <li key={index}>
-                                <p>{product.title}</p>
-                            </li>
+        <div className="cards_container flex flex-col max-w-[1120px] w-[90%] mx-auto">
+            <div className="cards_wrapper relative my-[45px] mt-[50px]">
+                <ul className="cards_items mb-[25px]">
+                {products.slice(0, 4).map((product, index) => (
+                            <CardItem 
+                            path={product.path}
+                            src={product.src} 
+                            label={product.label}
+                            title={product.title}
+                            key={index}  />
                         ))}
                 </ul>
             </div>
