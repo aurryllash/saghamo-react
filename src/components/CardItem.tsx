@@ -12,13 +12,13 @@ interface Props {
 const CardItem = (props : Props) => {
   return (
     <>
-    <li className='cards_item flex flex-1 my-10 mx-[1rem] rounded-xl'>
+    <li className='cards_item'>
         <Link className='cards_item_link' to={props.path}  data-category={props.label}>
-            <figure className='cards_item_pic-wrap relative w-[100%] pt-[67%]' data-category={props.label}>
+            <figure className='cards_item_pic-wrap' data-category={props.label}>
                 <img src={ props.src } alt={ props.title } 
                 className='cards_item_img'/>
             </figure>
-            <div className="cards_item_info">
+            <div className="cards_item_info flex justify-start">
                 <h5 className='cards_item_text'>{props.title}</h5>
                 <h5 className='cards_item_text'>₾{props.price} GEL</h5>
             </div>
