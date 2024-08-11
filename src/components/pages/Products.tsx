@@ -1,8 +1,13 @@
 import React from 'react'
+import Cards from '../Cards'
+import Filter from '../Filter'
 
 const Products = () => {
   return (
-    <div>Products</div>
+    <section className='products_container p-[4rem]'>
+      <Filter />
+      <Cards  />
+    </section>
   )
 }
 

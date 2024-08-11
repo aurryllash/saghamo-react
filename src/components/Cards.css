@@ -65,11 +65,11 @@
     max-height: 100%;
     
     object-fit:scale-down;
-    transition: all 0.2s linear;
+    transition: all 0.3s linear;
 }
   
 .cards_item_img:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
   
 .cards_item_info {
