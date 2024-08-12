@@ -3,6 +3,13 @@
   margin: 0;
   padding: 0;
 }
+* {
+  scrollbar-width:thin;
+  scrollbar-color: black #f1f1f1; 
+}
+body {
+  overflow-y: scroll;
+}
 .home,
 .products,
 .contact {
