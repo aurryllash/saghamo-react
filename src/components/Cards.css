@@ -37,7 +37,7 @@
 @media only screen and (max-width: 500px) {
     .cards_items  {
         display: grid;
-        grid-template-rows: 250px 250px 250px 250px;
+        grid-template-rows: 300px 300px 300px 300px;
         grid-template-columns: 200px 200px;
         
     }
@@ -45,8 +45,8 @@
 @media only screen and (max-width: 400px) {
     .cards_items  {
         display: grid;
-        grid-template-rows: 250px 250px 250px 250px;
-        /* grid-template-columns: 140px 140px; */
+        grid-template-rows: 300px 300px 300px 300px;
+        grid-template-columns: 140px 140px;
     }
 }
   
