@@ -3,24 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 const Filter = () => {
   return (
-    // <section className="filter_container">
-    //     <div className="filter_wrapper  max-w-screen-lg mx-auto grid grid-cols-1 gap-6 xl:grid-cols-2 p-4">
-    //         <Menu as="div" className="relative ml-3"> 
-    //             <div className="filter_content flex items-center space-x-4">
-    //                 <p>Filter: </p>
-    //                 <MenuButton>Availabelity <i className='fa-solid fa-chevron-down  text-black text-[12px]'></i></MenuButton>
-    //                 <a>Price <i className='fa-solid fa-chevron-down  text-black text-[12px]'></i></a>
-    //             </div>
-    //         <Menu />
-            
-    //         <div className="content flex items-center space-x-4">
-    //             <p>Sort by: </p>
-    //             <a>Date, old to new <i className='fa-solid fa-chevron-down  text-black text-[12px]'></i></a>
-    //             <a>46 products <i className='fa-solid fa-chevron-down  text-black text-[12px]'></i></a>
-    //         </div>
-    //     </div>
-    // </section>
-    <section className="filter_container">
+    <section className="filter_container mb-20">
         <div className="filter_wrapper max-w-screen-lg mx-auto grid md:grid-cols-2 sm:grid-cols-1 gap-2 xl:grid-cols-2">
             <div className="filter_content flex items-center space-x-4">
                 <p>Filter: </p>

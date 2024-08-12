@@ -33,13 +33,6 @@
         grid-template-rows: 500px 500px 500px 500px;
         grid-template-columns: 250px 250px;
     }
-    /* .cards_item_pic-wrap {
-        max-width: 400px;
-        width: 80%;
-    } */
-    /* .cards_item_link {
-        width: 500px;
-    } */
 }
 @media only screen and (max-width: 500px) {
     .cards_items  {
@@ -57,26 +50,9 @@
     }
 }
   
-/* .cards_item_link {
-    display: flex;
-    flex-flow: column;
-    width: 120%;
-    height: 400px;
-    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
-    -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
-    filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
-    border-radius: 10px;
-    overflow: hidden;
-    text-decoration: none;
-} */
-  
 .cards_item_pic-wrap {
     position: relative;
     margin: 10px;
-    /* max-width: 300px;
-    width: 100%;
-    padding-top: 67%;
-    height: 400px; */
 } 
 .cards_item_pic-wrap::after {
     content: attr(data-category);
