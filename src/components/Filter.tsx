@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 const Filter = () => {
   return (
-    <section className="filter_container mb-20">
+    <section className="filter_container">
         <div className="filter_wrapper max-w-screen-lg mx-auto grid md:grid-cols-2 sm:grid-cols-1 gap-2 xl:grid-cols-2">
             <div className="filter_content flex items-center space-x-4">
                 <p>Filter: </p>
@@ -42,8 +42,6 @@ const Filter = () => {
                 <a className="flex items-center space-x-1">Date, old to new
                     <i className='fa-solid fa-chevron-down text-black text-[12px] ml-1'></i>
                 </a>
-                {/* <a className="flex items-center space-x-1">46 products
-                </a> */}
             </div>
         </div>
     </section>

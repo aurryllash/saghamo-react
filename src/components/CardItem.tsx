@@ -18,7 +18,7 @@ const CardItem = (props : Props) => {
                 <img src={ props.src } alt={ props.title } 
                 className='cards_item_img'/>
             </figure>
-            <div className="cards_item_info flex justify-start">
+            <div className="cards_item_info">
                 <h5 className='cards_item_text'>{props.title}</h5>
                 <h5 className='cards_item_text'>₾{props.price} GEL</h5>
             </div>
