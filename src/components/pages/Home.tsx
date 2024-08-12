@@ -5,10 +5,9 @@ const Home = () => {
   return (
         <>
             <section className='home'>
-                
             </section>
-            <section>
-                <Cards />
+            <section className='h-[80vh]'>
+                <Cards main={true} />
             </section>
         </>  
   )

@@ -5,7 +5,7 @@ import { Button } from '@headlessui/react'
 
 const Footer = () => {
 
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState<string>('')
 
     const handelSubmit = (e: FormEvent) => {
         e.preventDefault();

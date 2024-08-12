@@ -8,10 +8,14 @@ interface Product {
     src: string;
     label?: string
     title:string,
-    price: number
+    price: number,
+    main?: boolean
+}
+interface Card {
+    main?: boolean
 }
 
-const Cards = () => {
+const Cards = (card: Card) => {
 
     const [products, setProducts] = useState<Product[]>([])
 
@@ -28,7 +32,7 @@ const Cards = () => {
     <div className="cards">
         <div className="cards_container">
                 <ul className="cards_items mb-[25px]">
-                {products.map((product, index) => (
+                {!card.main && products.map((product, index) => (
                             <CardItem 
                             path={product.path}
                             src={product.src} 
@@ -36,11 +40,9 @@ const Cards = () => {
                             title={product.title}
                             price={product.price}
                             key={index}  />
-                        ))}
-                </ul>
-            {/* <div className="cards_wrapper relative my-[45px] mt-[50px]">
-                <ul className="cards_items mb-[25px]">
-                {products.slice(4, 8).map((product, index) => (
+                ))
+                }
+                {card.main && products.slice(0, 4).map((product, index) => (
                             <CardItem 
                             path={product.path}
                             src={product.src} 
@@ -48,9 +50,9 @@ const Cards = () => {
                             title={product.title}
                             price={product.price}
                             key={index}  />
-                        ))}
+                        ))
+                }       
                 </ul>
-            </div> */}
         </div>
     </div>
   )
