@@ -53,7 +53,7 @@ const Cards = (card: Card) => {
               <CardItem
                 path={product.title}
                 src={product.images[0].url}
-                // label={product.label}
+                label={product.title}
                 title={product.title}
                 price={product.price}
                 key={index}
@@ -64,13 +64,13 @@ const Cards = (card: Card) => {
               .slice(0, 4)
               .map((product, index) => (
                 <CardItem
-                  path={product.path}
-                  src={product.src}
-                  label={product.label}
-                  title={product.title}
-                  price={product.price}
-                  key={index}
-                />
+                path={product.title}
+                src={product.images[0].url}
+                label={product.title}
+                title={product.title}
+                price={product.price}
+                key={index}
+              />
               ))}
         </ul>
       </div>
