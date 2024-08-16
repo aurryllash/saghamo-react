@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./RegistrationForm.css";
 import { Button } from "@headlessui/react";
+import { Alert } from "@material-tailwind/react";
 
 const RegistrationForm = () => {
   const {
@@ -10,45 +11,67 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-        username: 'john',
-        email: 'john@gmail.com',
-        phone: 555555555,
-        password: '123321123'
-    }
+      username: "giusha",
+      email: "giusha@gmail.com",
+      phone: 555555555,
+      password: "123321123",
+    },
   });
 
   const [userExistError, setUserExistError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: any) => {
-      fetch("/api/registration", {
+  const onSubmit = async (data: any) => {
+    setUserExistError(null);
+    setSuccess(null);
+    try {
+      const res = await fetch("/api/registration", {
         method: "post",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
-      })
-      .then(res => {
-        if(!res.ok) {
-          return res.json().then(response => {
-            if(response == 'User already exist') {
-              setUserExistError('User already exists. Please choose a different email.')
-            }
-          })
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const response = await res.json();
+        if (response === "User already exist") {
+          setUserExistError(
+            "User already exists. Please choose a different email."
+          );
+        } else {
+          setUserExistError(
+            "An error occurred. Please try again."
+          );
         }
-        return res.json()
-      })
-      .then(response => {
-        if(response === 'User already exist') {
-          console.log(response)
-        }
-      })
-      .catch(error => console.log(error))
+      } else {
+        const response = await res.json();
+        console.log('success: ', response)
+        setSuccess('User registered successfully')
+        setUserExistError(null);
+      }
+    } catch(error) {
+      console.log(error)
+    }
+    
+    // .then((response) => {
+    //   console.log("Success", response);
+    //   // setSuccess("User registered successfully");
+    // })
+    // .catch((error) => console.log(error));
   };
 
   return (
     <div className="registration h-[100vh] flex justify-center items-start pt-20 bg-slate-600">
       <div className="registration_wrapper">
         <h1>REGISTRATION</h1>
+        {success && (
+          <div
+            className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            role="alert"
+          >
+            {String(success)}
+          </div>
+        )}
         <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-field">
             <label>
@@ -56,19 +79,23 @@ const RegistrationForm = () => {
             </label>
             <input
               type="text"
-              {...register("username", { required: "Field is required!", minLength: {
-                value: 5,
-                message: 'Must be at least 5 character!'
-              } })}
+              {...register("username", {
+                required: "Field is required!",
+                minLength: {
+                  value: 5,
+                  message: "Must be at least 5 character!",
+                },
+              })}
               placeholder="john..."
             />
+            <div className="registration_errors">
+              {errors.username?.message && (
+                <p className="text-red-500">
+                  {String(errors.username.message)}
+                </p>
+              )}
+            </div>
           </div>
-          <div className="registration_errors">
-            {errors.username?.message && (
-              <p className="text-red-500">{String(errors.username.message)}</p>
-            )}
-          </div>
-
           <div className="input-field">
             <label>
               Email: <sup>*</sup>
@@ -78,12 +105,14 @@ const RegistrationForm = () => {
               {...register("email", { required: "Field is required!" })}
               placeholder="example@gmail.com..."
             />
-          </div>
-          <div className="registration_errors">
-            {errors.email?.message && (
-              <p className="text-red-500">{String(errors.email.message)}</p>
-            )}
-            {userExistError && <p className="text-red-500">{String(userExistError)}</p>}
+            <div className="registration_errors">
+              {errors.email?.message && (
+                <p className="text-red-500">{String(errors.email.message)}</p>
+              )}
+              {userExistError && (
+                <p className="text-red-500">{String(userExistError)}</p>
+              )}
+            </div>
           </div>
           <div className="input-field">
             <label>
@@ -96,17 +125,16 @@ const RegistrationForm = () => {
                 minLength: {
                   value: 9,
                   message: "Must be 9 number!",
-                }
+                },
               })}
               placeholder="111 111 111..."
             />
+            <div className="registration_errors">
+              {errors.phone?.message && (
+                <p className="text-red-500">{String(errors.phone.message)}</p>
+              )}
+            </div>
           </div>
-          <div className="registration_errors">
-            {errors.phone?.message && (
-              <p className="text-red-500">{String(errors.phone.message)}</p>
-            )}
-          </div>
-
           <div className="input-field">
             <label>
               Password: <sup>*</sup>
@@ -122,13 +150,14 @@ const RegistrationForm = () => {
               })}
               placeholder="sd%$df#6F37^g"
             />
+            <div className="registration_errors">
+              {errors.password?.message && (
+                <p className="text-red-500">
+                  {String(errors.password.message)}
+                </p>
+              )}
+            </div>
           </div>
-          <div className="registration_errors">
-            {errors.password?.message && (
-              <p className="text-red-500">{String(errors.password.message)}</p>
-            )}
-          </div>
-
           <div className="input-field">
             {/* <button type='submit'>SUBMIT</button> */}
             <Button
