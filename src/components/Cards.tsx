@@ -35,7 +35,7 @@ const Cards = (card: Card) => {
   const [products, setProducts] = useState<ProductFromBack[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/clothes")
+    fetch("/api/clothes")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

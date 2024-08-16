@@ -6,13 +6,14 @@ const Home = () => {
     console.log('mounted')
   }, [])
   return (
-        <>
+        <div>
             <section className='home'>
+              home
             </section>
-            <section className='h-[80vh]'>
+            <section className='h-auto'>
                 <Cards main={true} />
             </section>
-        </>  
+        </div>  
   )
 }
 

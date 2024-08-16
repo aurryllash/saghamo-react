@@ -10,28 +10,26 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-        userName: 'john',
+        username: 'john',
         email: 'john@gmail.com',
-        number: 555555555,
+        phone: 555555555,
         password: '123321123'
-        
     }
   });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data: any) => {
-    try {
-      console.log(data);
-      const response = await fetch("http://localhost:9000/registration", {
-        method: "POST",
+  const onSubmit = (data: any) => {
+      // data.role = 'user';
+      // data.purchasedProductsIds = null
+      // console.log(data);
+      fetch("/api/registration", {
+        method: "post",
         headers: {
-            "Content-Type": "application/json",
-          },
-        body: JSON.stringify(data),
-      });
-      console.log(`Data is send successfully, response: ${response}`);
-    } catch (error) {
-      console.log(error);
-    }
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(response => console.log(response))
   };
 
   return (
@@ -45,13 +43,13 @@ const RegistrationForm = () => {
             </label>
             <input
               type="text"
-              {...register("userName", { required: "Field is required!" })}
+              {...register("username", { required: "Field is required!" })}
               placeholder="john..."
             />
           </div>
           <div className="registration_errors">
-            {errors.userName?.message && (
-              <p className="text-red-500">{String(errors.userName.message)}</p>
+            {errors.username?.message && (
+              <p className="text-red-500">{String(errors.username.message)}</p>
             )}
           </div>
 
@@ -76,20 +74,19 @@ const RegistrationForm = () => {
             </label>
             <input
               type="number"
-              {...register("number", {
+              {...register("phone", {
                 required: "Field is required!",
                 minLength: {
                   value: 9,
                   message: "Must be 9 number!",
-                },
-                maxLength: 9,
+                }
               })}
               placeholder="111 111 111..."
             />
           </div>
           <div className="registration_errors">
-            {errors.number?.message && (
-              <p className="text-red-500">{String(errors.number.message)}</p>
+            {errors.phone?.message && (
+              <p className="text-red-500">{String(errors.phone.message)}</p>
             )}
           </div>
 
