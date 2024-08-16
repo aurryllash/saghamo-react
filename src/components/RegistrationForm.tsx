@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./RegistrationForm.css";
 import { Button } from "@headlessui/react";
@@ -16,11 +16,10 @@ const RegistrationForm = () => {
         password: '123321123'
     }
   });
+
+  const [userExistError, setUserExistError] = useState<string | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
-      // data.role = 'user';
-      // data.purchasedProductsIds = null
-      // console.log(data);
       fetch("/api/registration", {
         method: "post",
         headers: {
@@ -28,8 +27,22 @@ const RegistrationForm = () => {
         },
         body: JSON.stringify(data)
       })
-      .then(res => res.json())
-      .then(response => console.log(response))
+      .then(res => {
+        if(!res.ok) {
+          return res.json().then(response => {
+            if(response == 'User already exist') {
+              setUserExistError('User already exists. Please choose a different email.')
+            }
+          })
+        }
+        return res.json()
+      })
+      .then(response => {
+        if(response === 'User already exist') {
+          console.log(response)
+        }
+      })
+      .catch(error => console.log(error))
   };
 
   return (
@@ -43,7 +56,10 @@ const RegistrationForm = () => {
             </label>
             <input
               type="text"
-              {...register("username", { required: "Field is required!" })}
+              {...register("username", { required: "Field is required!", minLength: {
+                value: 5,
+                message: 'Must be at least 5 character!'
+              } })}
               placeholder="john..."
             />
           </div>
@@ -67,6 +83,7 @@ const RegistrationForm = () => {
             {errors.email?.message && (
               <p className="text-red-500">{String(errors.email.message)}</p>
             )}
+            {userExistError && <p className="text-red-500">{String(userExistError)}</p>}
           </div>
           <div className="input-field">
             <label>
