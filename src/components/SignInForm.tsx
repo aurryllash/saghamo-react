@@ -1,13 +1,22 @@
-import { Button } from '@headlessui/react';
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import { Button } from '@headlessui/react';
+import { LoginData } from './Interfaces/interface';
 
 const SignInForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginData>()
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data: LoginData) => {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data)
+        })
+
+        console.log(response)
     }
   return (
     <div className="registration h-[100vh] flex justify-center items-start pt-20 bg-slate-600">

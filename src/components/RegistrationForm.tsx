@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./RegistrationForm.css";
 import { Button } from "@headlessui/react";
-// import { Alert } from "@material-tailwind/react";
+import { RegistrationData } from "./Interfaces/interface";
 
 const RegistrationForm = () => {
   const {
@@ -10,15 +10,14 @@ const RegistrationForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<RegistrationData>();
 
 
 
   const [userExistError, setUserExistError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: RegistrationData) => {
     setUserExistError(null);
     setSuccess(null);
     try {
