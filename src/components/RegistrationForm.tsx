@@ -1,33 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./RegistrationForm.css";
 import { Button } from "@headlessui/react";
-import { Alert } from "@material-tailwind/react";
+// import { Alert } from "@material-tailwind/react";
 
 const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      username: "giusha",
-      email: "giusha@gmail.com",
-      phone: 555555555,
-      password: "123321123",
-    },
-  });
+  } = useForm();
 
 
 
   const [userExistError, setUserExistError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  // console.log('success: ', success)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setUserExistError(null);
-    // setSuccess(null);
+    setSuccess(null);
     try {
       const res = await fetch("/api/registration", {
         method: "POST",
@@ -36,9 +29,9 @@ const RegistrationForm = () => {
         },
         body: JSON.stringify(data),
       });
-      console.log(res)
+
+      const response = await res.json();
       if (!res.ok) {
-        const response = await res.json();
         if (response === "User already exist") {
           setUserExistError(
             "User already exists. Please choose a different email."
@@ -49,13 +42,14 @@ const RegistrationForm = () => {
           );
         }
       } else {
-        const response = await res.json();
         console.log('success: ', response)
-        console.log('GIORGAAAAAA')
         setSuccess('User registered successfully')
         setUserExistError(null);
+        reset()
+        setTimeout(() => {
+          setSuccess(null)
+        }, 3000)
       }
-
     } catch(error) {
       console.log('Error: ', error)
     }
