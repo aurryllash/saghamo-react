@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./RegistrationForm.css";
 import { Button } from "@headlessui/react";
@@ -18,20 +18,25 @@ const RegistrationForm = () => {
     },
   });
 
+
+
   const [userExistError, setUserExistError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  // console.log('success: ', success)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setUserExistError(null);
-    setSuccess(null);
+    // setSuccess(null);
     try {
       const res = await fetch("/api/registration", {
-        method: "post",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
+      console.log(res)
       if (!res.ok) {
         const response = await res.json();
         if (response === "User already exist") {
@@ -46,18 +51,14 @@ const RegistrationForm = () => {
       } else {
         const response = await res.json();
         console.log('success: ', response)
+        console.log('GIORGAAAAAA')
         setSuccess('User registered successfully')
         setUserExistError(null);
       }
+
     } catch(error) {
-      console.log(error)
+      console.log('Error: ', error)
     }
-    
-    // .then((response) => {
-    //   console.log("Success", response);
-    //   // setSuccess("User registered successfully");
-    // })
-    // .catch((error) => console.log(error));
   };
 
   return (
