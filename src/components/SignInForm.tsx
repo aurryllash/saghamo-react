@@ -1,28 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Button } from '@headlessui/react';
 import { LoginData } from './Interfaces/interface';
+import './SignInForm.css'
+
 
 const SignInForm = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginData>()
+    const [userNotExistError, setUserNotExistError] = useState<string | null>(null)
+    const [wrongCredentials, setWrongCredentials] = useState<string | null>(null)
 
     const onSubmit = async (data: LoginData) => {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data)
-        })
-
-        console.log(response)
+        setUserNotExistError(null)
+        setWrongCredentials(null)
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data)
+            })
+    
+            const res = await response.json();
+    
+            if(res.ok) {
+                console.log(res)
+            } else {
+                console.log('Something went wrong: ', res)
+                if(res === 'User does not exist!') {
+                    setUserNotExistError('User does not exist. Please try again')
+                }
+                if(res === 'email or password is wrong.') {
+                    setWrongCredentials('Wrong credentials invalid username or password')
+                }
+            }
+        } catch(error) {
+            console.log('Error: ', error)
+        }
+        
     }
   return (
-    <div className="registration h-[100vh] flex justify-center items-start pt-20 bg-slate-600">
-      <div className="registration_wrapper">
-        <h1>SIGN IN</h1>
-        <form className="registration_form" onSubmit={handleSubmit(onSubmit)}>
+    <div className="sign-in h-[100vh] flex justify-center items-start pt-20 sm:mx-5 bg-white">
+      <div className="sign-in_wrapper px-10">
+        <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center pb-5'>SIGN IN</h1>
+        <form className="sign-in_form" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-field">
             <label>
               Email: <sup>*</sup>
@@ -32,9 +55,12 @@ const SignInForm = () => {
               {...register("email", { required: "Field is required!" })}
               placeholder="example@gmail.com..."
             />
-            <div className="registration_errors">
+            <div className="sign-in_errors">
               {errors.email?.message && (
                 <p className="text-red-500">{String(errors.email.message)}</p>
+              )}
+              {userNotExistError && (
+                <p className="text-red-500">{String(userNotExistError)}</p>
               )}
             </div>
           </div>
@@ -53,11 +79,14 @@ const SignInForm = () => {
               })}
               placeholder="sd%$df#6F37^g"
             />
-            <div className="registration_errors">
+            <div className="sign-in_errors">
               {errors.password?.message && (
                 <p className="text-red-500">
                   {String(errors.password.message)}
                 </p>
+              )}
+              {wrongCredentials && (
+                <p className="text-red-500">{String(wrongCredentials)}</p>
               )}
             </div>
           </div>

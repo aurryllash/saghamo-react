@@ -12,8 +12,6 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm<RegistrationData>();
 
-
-
   const [userExistError, setUserExistError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -55,9 +53,9 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="registration h-[100vh] flex justify-center items-start pt-20 bg-slate-600">
+    <div className="registration h-[100vh] flex justify-center items-start pt-20">
       <div className="registration_wrapper">
-        <h1>REGISTRATION</h1>
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center pb-5">REGISTRATION</h1>
         {success && (
           <div
             className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
@@ -156,7 +154,7 @@ const RegistrationForm = () => {
             {/* <button type='submit'>SUBMIT</button> */}
             <Button
               type="submit"
-              className="rounded w-[100%] max-w-80 bg-black py-[12px] px-20   text-white data-[hover]:bg-transparent data-[active]:bg-white data-[active]:text-black"
+              className="rounded w-[100%] max-w-80 bg-black py-[12px] px-20   text-white data-[hover]:bg-gray-500 data-[active]:bg-white data-[active]:text-black"
             >
               Registration
             </Button>

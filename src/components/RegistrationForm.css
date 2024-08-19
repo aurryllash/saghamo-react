@@ -1,5 +1,6 @@
 .registration {
     padding-bottom: 100px;
+    background: #fff;
 }
 sup {
     color: rgb(253, 82, 82);
@@ -10,6 +11,8 @@ sup {
     border-radius: 10px;
     width: 400px;
     margin-top: 10px;
+
+    border: 1px solid gray;
 }
 .registration input:focus {
     outline: none;
@@ -17,15 +20,15 @@ sup {
 .registration label {
     font-size: 20px;
 }
-.registration h1 {
-    font-size: 70px;
-}
 .registration_form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
+
+    border: 2px solid black;
+    padding: 30px 20px 40px 20px;
+    border-radius: 20px;
 }
 .input-field {
     display: flex;
@@ -42,10 +45,7 @@ sup {
 .sign-in-link:hover {
     color: purple;
 }
-@media screen and (max-width: 820px) {
-    .registration h1 {
-        font-size: 50px;
-    }
+@media screen and (max-width: 768px) {
     .registration input {
         display: flex;
         flex-direction: column;
@@ -53,5 +53,8 @@ sup {
         align-items: center;
 
         width: 350px;
+    }
+    .registration_form {
+        border: none;
     }
 }

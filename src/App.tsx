@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer';
 import { Registration } from './components/pages/Registration';
 import SignIn from './components/pages/SignIn';
+
 function App() {
 
   return (

@@ -3,8 +3,9 @@ import RegistrationForm from '../RegistrationForm'
 
 export const Registration = () => {
   return (
-    <>
-    <RegistrationForm />
-    </>
+    <div className='bg-red-600'>
+      <RegistrationForm />
+    </div>
+    
   )
 }
