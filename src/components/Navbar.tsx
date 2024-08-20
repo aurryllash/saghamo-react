@@ -10,6 +10,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import LogOut from './LogOut'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -66,7 +67,7 @@ export default function Example() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
+            <button><LogOut /></button>
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <div>
