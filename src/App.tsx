@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer';
 import { Registration } from './components/pages/Registration';
 import SignIn from './components/pages/SignIn';
+import Error404 from './components/pages/Error404';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/Products' element={<Products /> } />
           <Route path='/registration' element={<Registration /> } />
           <Route path='/signIn' element={<SignIn /> } />
+          <Route path='*' element={<Error404 />} />
         </Routes>
         <Footer />
       </Router>
