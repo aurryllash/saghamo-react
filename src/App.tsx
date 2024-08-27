@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import { Registration } from "./components/pages/Registration";
 import SignIn from "./components/pages/SignIn";
 import Error404 from "./components/pages/Error404";
+import { AuthProvider } from "./components/AuthContext";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <div className="app">
+      <AuthProvider>
       <Router>
         <LayOut>
           <Routes>
@@ -44,6 +46,7 @@ function App() {
           </Routes>
         </LayOut>
       </Router>
+      </AuthProvider>
     </div>
   );
 }
