@@ -17,7 +17,7 @@ const navigation = [
   { name: 'products', href: '/products', current: false },
   { name: 'About Us', href: '/about-us', current: false },
   { name: 'Contact', href: '/contact', current: false },
-  { name: 'Registration', href: '/registration', current: false },
+  { name: 'Sign In', href: '/signin', current: false },
 ]
 
 function classNames(...classes: (string | false | null | undefined)[]): string {

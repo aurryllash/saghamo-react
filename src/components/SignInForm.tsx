@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@headlessui/react';
 import { LoginData } from './Interfaces/interface';
 import './SignInForm.css'
+import { Link } from 'react-router-dom';
 
 
 const SignInForm = () => {
@@ -25,7 +26,7 @@ const SignInForm = () => {
     
             const res = await response.json();
     
-            if(res.ok) {
+            if(response.ok) {
                 console.log(res)
             } else {
                 console.log('Something went wrong: ', res)
@@ -41,6 +42,7 @@ const SignInForm = () => {
         }
         
     }
+    
   return (
     <div className="sign-in h-[100vh] flex justify-center items-start pt-20 sm:mx-5 bg-white">
       <div className="sign-in_wrapper px-10">
@@ -95,8 +97,11 @@ const SignInForm = () => {
               type="submit"
               className="rounded w-[100%] max-w-80 bg-black py-[12px] px-20   text-white data-[hover]:bg-transparent data-[active]:bg-white data-[active]:text-black"
             >
-              Registration
+              Sign In
             </Button>
+          </div>
+          <div className="options mt-2 ">
+                <p>Do not have an account?<Link to='/registration' className='registration-link ml-2 hover:text-pink-400'>Registration</Link></p>
           </div>
         </form>
       </div>

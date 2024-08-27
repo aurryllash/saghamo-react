@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
   useLocation,
-  Navigate,
+  Navigate
 } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Products from "./components/pages/Products";
@@ -15,6 +15,7 @@ import SignIn from "./components/pages/SignIn";
 import Error404 from "./components/pages/Error404";
 
 function App() {
+
   const LayOut = ({ children }: { children: React.ReactNode }) => {
     const location = useLocation();
 

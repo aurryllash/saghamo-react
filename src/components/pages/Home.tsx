@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Cards from '../Cards'
 
 const Home = () => {
-  useEffect(() => {
-    console.log('mounted')
-  }, [])
+
   return (
         <div>
             <section className='home'>

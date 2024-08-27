@@ -16,7 +16,7 @@ interface Card {
 interface Image {
     public_id: string;
     url: string;
-  }
+}
   
   interface ProductFromBack {
     createdAt: string;
