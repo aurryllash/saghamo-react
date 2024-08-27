@@ -3,8 +3,7 @@ import { LoginData } from './Interfaces/interface';
 
 interface AuthContextType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: string;
   login: (userData: LoginData) => Promise<{ success: boolean, error?: string }>;
   logout: () => void;
 }
@@ -15,12 +14,10 @@ interface AuthProviderProps {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<string>('');
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const login = async (data: any) => {
+  const login = async (data: LoginData) => {
 
     try {
       const response = await fetch('/api/login', {
@@ -33,12 +30,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       const res = await response.json();
 
+      
+
       if (response.ok) {
-        setUser(res);
-        // setUser(userData);
+        setUser(res.token);
         return { success: true };
       } else {
-        // Handle specific error cases
+
         if (res === 'User does not exist!') {
           return { success: false, error: 'User does not exist. Please try again.' };
         }
@@ -57,7 +55,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = () => {
     // Implement logout logic here
-    setUser(null);
+    setUser('');
   };
 
   return (

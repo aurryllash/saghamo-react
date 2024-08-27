@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@headlessui/react";
 import { LoginData } from "./Interfaces/interface";
 import "./SignInForm.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 const SignInForm = () => {
@@ -19,6 +19,7 @@ const SignInForm = () => {
   );
   const [wrongCredentials, setWrongCredentials] = useState<string | null | undefined>(null);
 
+  const navigate = useNavigate();
   const onSubmit = async (data: LoginData) => {
     setUserNotExistError(null);
     setWrongCredentials(null);
@@ -46,10 +47,7 @@ const SignInForm = () => {
       // }
       const result = await login(data);
 
-      console.log(result)
-
       if (!result.success) {
-        // Display error messages based on the response
         if (result.error === "User does not exist. Please try again.") {
           setUserNotExistError(result.error);
         } else if (
@@ -57,16 +55,16 @@ const SignInForm = () => {
         ) {
           setWrongCredentials(result.error);
         } else {
-          // Handle other types of errors (e.g., network issues)
           setWrongCredentials(result.error);
         }
       } else {
         console.log("Login successful! 111");
-        // Redirect the user or perform other actions after a successful login
+        navigate('/admin')
       }
     } catch (error) {
       console.log("Error: ", error);
     }
+    
   };
 
   return (
