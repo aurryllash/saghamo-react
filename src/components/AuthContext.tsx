@@ -1,10 +1,15 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { LoginData } from './Interfaces/interface';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { LoginData } from "./Interfaces/interface";
 
 interface AuthContextType {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: string;
-  login: (userData: LoginData) => Promise<{ success: boolean, error?: string }>;
+  user: string | undefined | null;
+  login: (userData: LoginData) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
 }
 
@@ -12,16 +17,25 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<string>('');
+  const [user, setUser] = useState<string | undefined | null>();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    console.log('local: ', token)
+
+    if(token) {
+      setUser(token)
+    }
+  }, [])
 
   const login = async (data: LoginData) => {
-
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
+      const response = await fetch("/api/login", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -30,32 +44,40 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       const res = await response.json();
 
-      
-
       if (response.ok) {
+        localStorage.setItem('token', res.token)
         setUser(res.token);
         return { success: true };
       } else {
-
-        if (res === 'User does not exist!') {
-          return { success: false, error: 'User does not exist. Please try again.' };
+        if (res === "User does not exist!") {
+          return {
+            success: false,
+            error: "User does not exist. Please try again.",
+          };
         }
-        if (res === 'email or password is wrong.') {
-          return { success: false, error: 'Wrong credentials: invalid username or password.' };
+        if (res === "email or password is wrong.") {
+          return {
+            success: false,
+            error: "Wrong credentials: invalid username or password.",
+          };
         }
-        return { success: false, error: 'An unknown error occurred. Please try again later.' };
+        return {
+          success: false,
+          error: "An unknown error occurred. Please try again later.",
+        };
       }
-
     } catch (error) {
-      console.error('Login Error:', error);
-      return { success: false, error: 'Failed to connect to the server. Please try again.' };
+      console.error("Login Error:", error);
+      return {
+        success: false,
+        error: "Failed to connect to the server. Please try again.",
+      };
     }
-    
   };
 
   const logout = () => {
-    // Implement logout logic here
-    setUser('');
+    localStorage.removeItem('token')
+    setUser(null);
   };
 
   return (
@@ -68,7 +90,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

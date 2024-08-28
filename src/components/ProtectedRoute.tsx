@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
-  console.log(user)
-    if(!user) 
-    return <Navigate to="/signin" replace />
+  const [isLoading, setIsLoading] = useState(true);
 
-    console.log('User from protected Route: ', user)
-    return children
-  
+  useEffect(() => {
+    setIsLoading(false);
+  }, [user]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (!user) return <Navigate to="/signin" />;
+
+  return children;
 };
 
 export default ProtectedRoute;
