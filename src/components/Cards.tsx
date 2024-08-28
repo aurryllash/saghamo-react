@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./CardItem";
 import "./Cards.css";
+import Loading from "./Loading";
 
-// interface Product {
-//   path: string;
-//   src: string;
-//   label?: string;
-//   title: string;
-//   price: number;
-//   main?: boolean;
-// }
 interface Card {
   main?: boolean;
 }
@@ -33,6 +26,7 @@ interface Image {
 
 const Cards = (card: Card) => {
   const [products, setProducts] = useState<ProductFromBack[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/clothes")
@@ -43,6 +37,17 @@ const Cards = (card: Card) => {
       })
       .catch((error) => console.log(error));
   }, []);
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+    
+  }, [products])
+
+  if(isLoading) {
+    return <Loading />
+  }
 
   return (
     <div className="cards">
