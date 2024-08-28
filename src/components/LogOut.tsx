@@ -1,14 +1,14 @@
 import React from 'react'
+import { useAuth } from './AuthContext';
+
 
 const LogOut = () => {
+    const { logout } = useAuth();
     const handleSubmit = async () => {
         try {
-            const response = await fetch('/api/logout');
+            const response = await logout();
             
-            if(response.ok) {
-                console.log(response)
-            }
-
+            console.log('response: ', response)
             
         } catch(error) {
             console.log("Error: ", error)

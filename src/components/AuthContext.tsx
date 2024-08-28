@@ -10,13 +10,12 @@ import { LoginData } from "./Interfaces/interface";
 interface AuthContextType {
   user: string | undefined | null;
   login: (userData: LoginData) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
+  logout: () => Promise<string>;
 }
 
 interface AuthProviderProps {
   children: ReactNode;
 }
-
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -24,11 +23,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<string | undefined | null>();
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if(token) {
-      setUser(token)
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUser(token);
     }
-  }, [])
+  }, []);
 
   const login = async (data: LoginData) => {
     try {
@@ -43,7 +42,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const res = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', res.token)
+        localStorage.setItem("token", res.token);
         setUser(res.token);
         return { success: true };
       } else {
@@ -73,9 +72,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token')
-    setUser(null);
+  const logout = async () => {
+    try {
+      
+      const response = await fetch("/api/logout");
+      const res = await response.json();
+
+      if (response.ok) {
+        localStorage.removeItem("token");
+        setUser(null);
+
+        return res;
+      } else {
+        return 'failed to log out';
+      }
+
+
+      
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   return (

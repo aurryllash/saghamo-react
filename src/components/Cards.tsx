@@ -1,32 +1,17 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./CardItem";
 import "./Cards.css";
-import Loading from "./Loading";
+import { ProductFromBack } from "./Interfaces/interface";
+import { useProductStore } from "./Store";
 
 interface Card {
   main?: boolean;
-}
-interface Image {
-    public_id: string;
-    url: string;
-}
-  
-  interface ProductFromBack {
-    createdAt: string;
-    description: string;
-    images: Image[];
-    price: number;
-    reservedBy: string | null;
-    status: string;
-    title: string;
-    updatedAt: string;
-    __v: number;
-    _id: string;
-  }
+}  
 
 const Cards = (card: Card) => {
   const [products, setProducts] = useState<ProductFromBack[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const productsStore = useProductStore(state => state.increment)
 
   useEffect(() => {
     fetch("/api/clothes")
@@ -34,14 +19,12 @@ const Cards = (card: Card) => {
       .then((data) => {
         setProducts(data);
         console.log(data)
-        setIsLoading(false)
+        productsStore(data)
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [productsStore]);
 
-  if(isLoading) {
-    return <Loading />
-  }
+
 
   return (
     <div className="cards">

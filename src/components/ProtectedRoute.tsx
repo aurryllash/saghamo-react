@@ -8,15 +8,13 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
       setIsLoading(false);
-    }, 3000)
-      
   }, [user]);
 
   if (isLoading) {
     return <Loading />;
   }
+
   if (!user) return <Navigate to="/signin" />;
 
   return children;
