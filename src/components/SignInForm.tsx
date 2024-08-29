@@ -24,27 +24,6 @@ const SignInForm = () => {
     setUserNotExistError(null);
     setWrongCredentials(null);
     try {
-      // const response = await fetch('/api/login', {
-      //     method: 'POST',
-      //     headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify(data)
-      // })
-
-      // const res = await response.json();
-
-      // if(response.ok) {
-      //     console.log(res)
-      // } else {
-      //     console.log('Something went wrong: ', res)
-      //     if(res === 'User does not exist!') {
-      //         setUserNotExistError('User does not exist. Please try again')
-      //     }
-      //     if(res === 'email or password is wrong.') {
-      //         setWrongCredentials('Wrong credentials invalid username or password')
-      //     }
-      // }
       const result = await login(data);
 
       if (!result.success) {

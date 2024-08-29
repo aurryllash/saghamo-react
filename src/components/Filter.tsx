@@ -14,7 +14,7 @@ export default function Filter() {
                 <ChevronDownIcon className="w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-48 bg-white  z-10">
+            <DropdownMenuContent align="start" className="w-48 bg-white z-10 p-2">
               <DropdownMenuLabel>Select Category</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuCheckboxItem checked>Shirts</DropdownMenuCheckboxItem>
@@ -31,7 +31,7 @@ export default function Filter() {
                 <ChevronDownIcon className="w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-48 bg-white  z-10">
+            <DropdownMenuContent align="start" className="w-48 bg-white z-10 p-2">
               <DropdownMenuLabel>Select Price Range</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuCheckboxItem checked>$0 - $50</DropdownMenuCheckboxItem>
@@ -41,14 +41,14 @@ export default function Filter() {
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
-            <DropdownMenuTrigger>
-              <button className="flex items-center gap-2  outline-none">
+            <DropdownMenuTrigger className=" outline-none">
+              <button className="flex items-center gap-2">
                 <ListOrderedIcon className="w-4 h-4" />
                 Sort By
                 <ChevronDownIcon className="w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-48 bg-white z-10">
+            <DropdownMenuContent align="start" className="w-48 bg-white z-10 p-2">
               <DropdownMenuLabel>Sort Products</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup value="featured">

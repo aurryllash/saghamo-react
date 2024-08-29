@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
 }
 * {
   scrollbar-width:thin;
@@ -9,6 +10,7 @@
 }
 body {
   overflow-y: scroll;
+  @apply font-mono;
 }
 .home,
 .products,
