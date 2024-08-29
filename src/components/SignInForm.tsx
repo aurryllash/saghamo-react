@@ -59,7 +59,7 @@ const SignInForm = () => {
         }
       } else {
         console.log("Login successful! 111");
-        navigate('/admin')
+        navigate('/')
       }
     } catch (error) {
       console.log("Error: ", error);

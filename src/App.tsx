@@ -42,7 +42,7 @@ function App() {
               <Route path="/registration" element={<Registration />} />
               <Route path="/signIn" element={<SignIn />} />
               <Route
-                path="/admin"
+                path="/"
                 element={
                   <ProtectedRoute>
                     <Home />
