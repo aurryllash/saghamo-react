@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import CardItem from "./CardItem";
 import "./Cards.css";
 import { useProductStore } from "./Store";
@@ -8,21 +8,24 @@ interface Card {
 }
 
 const Cards = (card: Card) => {
-  // const [products, setProducts] = useState<ProductFromBack[]>([]);
-
+  const firstRender = useRef(true);
   const products = useProductStore((state) => state.products);
   const setProductsInStore = useProductStore((state) => state.setProducts);
 
   useEffect(() => {
-    if(!products) {
-      fetch("/api/clothes")
-      .then((res) => res.json())
-      .then((data) => {
-          setProductsInStore(data);
-      })
-      .catch((error) => console.log(error));
-    }
-    
+    if(firstRender.current) {
+      if(!products) {
+        fetch("/api/clothes")
+        .then((res) => res.json())
+        .then((data) => {
+            setProductsInStore(data);
+
+            console.log('mounted!')
+        })
+        .catch((error) => console.log(error));
+      }
+      firstRender.current = false
+    }  
   }, [products, setProductsInStore]);
 
   return (

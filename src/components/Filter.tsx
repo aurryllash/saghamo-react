@@ -1,23 +1,37 @@
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuCheckboxItem, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@radix-ui/react-dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+} from "@radix-ui/react-dropdown-menu";
 
 export default function Filter() {
   return (
-    <div className="bg-background border-b pb-[40px] z-10" style={{backgroundColor: 'background: 0 0% 85%;'}}>
+    <div className="bg-background border-b pb-[40px] z-10 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div className="container px-4 md:px-6 flex items-center justify-between">
-        <div className="flex items-start lg:items-center gap-4 flex-col sm:flex-col md:flex-col lg:flex-row">
+        <div className="flex text-sm lg:text-base items-start lg:items-center gap-4 flex-col sm:flex-col md:flex-col lg:flex-row">
           <h2 className="text-lg font-semibold">Filter Products</h2>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button  className="flex items-center gap-2 outline-none">
+              <button className="flex items-center gap-2 outline-none">
                 <FilterIcon className="w-4 h-4" />
                 Category
                 <ChevronDownIcon className="w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-48 bg-white z-10 p-2">
+            <DropdownMenuContent
+              align="start"
+              className="w-48 bg-white z-10 p-2"
+            >
               <DropdownMenuLabel>Select Category</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem checked>Shirts</DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem checked>
+                Shirts
+              </DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>Pants</DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>Dresses</DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>Accessories</DropdownMenuCheckboxItem>
@@ -31,42 +45,62 @@ export default function Filter() {
                 <ChevronDownIcon className="w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-48 bg-white z-10 p-2">
+            <DropdownMenuContent
+              align="start"
+              className="w-48 bg-white z-10 p-2"
+            >
               <DropdownMenuLabel>Select Price Range</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem checked>$0 - $50</DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem checked>
+                $0 - $50
+              </DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>$50 - $100</DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>$100 - $200</DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem>$200+</DropdownMenuCheckboxItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
-            <DropdownMenuTrigger className=" outline-none">
+            <DropdownMenuTrigger className="outline-none" asChild>
               <button className="flex items-center gap-2">
                 <ListOrderedIcon className="w-4 h-4" />
                 Sort By
                 <ChevronDownIcon className="w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-48 bg-white z-10 p-2">
+            <DropdownMenuContent
+              align="start"
+              className="w-48 bg-white z-10 p-2"
+            >
               <DropdownMenuLabel>Sort Products</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup value="featured">
-                <DropdownMenuRadioItem value="featured">Featured</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="newest">Newest</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="price-asc">Price: Low to High</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="price-desc">Price: High to Low</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="featured">
+                  Featured
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="newest">
+                  Newest
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="price-asc">
+                  Price: Low to High
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="price-desc">
+                  Price: High to Low
+                </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+          <button className="flex items-start justify-start gap-2 outline-none lg:hidden">
+          <TimerResetIcon className="w-4 h-4" />
+          Reset Filters
+        </button>
         </div>
-        <button  className="flex items-center gap-2  outline-none">
+        <button className="lg:flex items-start justify-start gap-2 outline-none hidden">
           <TimerResetIcon className="w-4 h-4" />
           Reset Filters
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,9 +120,8 @@ function ChevronDownIcon(props: any) {
     >
       <path d="m6 9 6 6 6-6" />
     </svg>
-  )
+  );
 }
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function DollarSignIcon(props: any) {
@@ -108,9 +141,8 @@ function DollarSignIcon(props: any) {
       <line x1="12" x2="12" y1="2" y2="22" />
       <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
     </svg>
-  )
+  );
 }
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function FilterIcon(props: any) {
@@ -129,9 +161,8 @@ function FilterIcon(props: any) {
     >
       <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
     </svg>
-  )
+  );
 }
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function ListOrderedIcon(props: any) {
@@ -155,9 +186,8 @@ function ListOrderedIcon(props: any) {
       <path d="M4 10h2" />
       <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
     </svg>
-  )
+  );
 }
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function TimerResetIcon(props: any) {
@@ -179,5 +209,5 @@ function TimerResetIcon(props: any) {
       <path d="M4 13a8 8 0 0 1 8-7 8 8 0 1 1-5.3 14L4 17.6" />
       <path d="M9 17H4v5" />
     </svg>
-  )
+  );
 }
