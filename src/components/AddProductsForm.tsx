@@ -13,21 +13,17 @@ export default function Component() {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("price", price);
-    if (images) images.forEach((image, index) => {
-      formData.append(`image_${index}`, image)
-    });
+    if (images)
+      images.forEach((image, index) => {
+        formData.append(`image_${index}`, image);
+      });
 
-      fetch("/api/clothes", {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+    console.log(images);
+
+    fetchForm(formData);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleFileChange = (e: any) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files;
 
     if (file) {
@@ -36,7 +32,7 @@ export default function Component() {
   };
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8 mb-20 lg:mb-0 h-[100vh] mt-20">
+    <div className="container mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8 mb-20 lg:mb-0 min-h-screen mt-20">
       <h1 className="mb-6 text-3xl font-bold">Add New Product</h1>
       <form
         id="form"
@@ -93,17 +89,20 @@ export default function Component() {
                 className="hidden"
                 onChange={handleFileChange}
               />
-              {/* {images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Product Image ${index + 1}`}
-                  width={96}
-                  height={96}
-                  className="rounded-md object-cover"
-                  style={{ aspectRatio: "96/96", objectFit: "cover" }}
-                />
-              ))} */}
+              {images.map((image, index) => {
+                const imageUrl = URL.createObjectURL(image);
+                return (
+                  <img
+                    key={index}
+                    src={imageUrl}
+                    alt={`Product Image ${index + 1}`}
+                    width={96}
+                    height={96}
+                    className="rounded-md object-cover"
+                    style={{ aspectRatio: "96/96", objectFit: "cover" }}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -116,6 +115,7 @@ export default function Component() {
     </div>
   );
 }
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function PlusIcon(props: any) {
   return (
@@ -136,11 +136,11 @@ function PlusIcon(props: any) {
     </svg>
   );
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function fetchForm(body: any) {
+
+async function fetchForm(formData: FormData) {
   fetch("/api/clothes", {
     method: "POST",
-    body: body,
+    body: formData,
   })
     .then((res) => res.json())
     .then((response) => console.log(response))
